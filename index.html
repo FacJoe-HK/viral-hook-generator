@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⚡ Viral Hook Generator 2026</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #111; color: #fff; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+        .container { background: #222; padding: 2rem; border-radius: 12px; width: 90%; max-width: 500px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        h1 { margin-top: 0; font-size: 1.5rem; text-align: center; color: #00ff88; }
+        label { display: block; margin-bottom: 0.5rem; color: #aaa; font-size: 0.9rem; }
+        input[type="text"] { width: 100%; padding: 12px; margin-bottom: 1.5rem; border: 1px solid #333; background: #000; color: #fff; border-radius: 6px; font-size: 1rem; box-sizing: border-box; }
+        button { width: 100%; padding: 12px; background: #00ff88; color: #000; border: none; border-radius: 6px; font-size: 1rem; font-weight: bold; cursor: pointer; transition: transform 0.1s; }
+        button:active { transform: scale(0.98); }
+        .results { margin-top: 2rem; }
+        .hook-card { background: #333; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; border-left: 4px solid #00ff88; cursor: pointer; position: relative; }
+        .hook-card:hover { background: #3a3a3a; }
+        .hook-card::after { content: 'Click to Copy'; position: absolute; right: 10px; top: 10px; font-size: 0.7rem; color: #888; opacity: 0; }
+        .hook-card:hover::after { opacity: 1; }
+        .category { font-size: 0.7rem; text-transform: uppercase; color: #888; margin-bottom: 4px; display: block; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>⚡ Viral Hook Generator</h1>
+        <label for="topic">What is your video about?</label>
+        <input type="text" id="topic" placeholder="e.g., Coding, Vegan Diet, Bitcoin..." onkeypress="handleEnter(event)">
+        <button onclick="generateHooks()">Generate Hooks</button>
+        <div class="results" id="results"></div>
+    </div>
+
+    <script>
+        const templates = [
+            { text: "Stop doing {topic} like this, it's killing your progress.", category: "Negative/Warning" },
+            { text: "I tried {topic} for 30 days and here's what happened.", category: "Case Study" },
+            { text: "The secret about {topic} that [Experts] don't want you to know.", category: "Conspiracy/Secret" },
+            { text: "If you want to master {topic}, watch this video.", category: "Authority" },
+            { text: "3 tools for {topic} that feel illegal to know.", category: "Listicle/Hype" },
+            { text: "This is why you're failing at {topic}.", category: "Controversial" },
+            { text: "Forget everything you know about {topic}.", category: "Pattern Interrupt" },
+            { text: "POV: You finally figured out {topic}.", category: "Relatable" }
+        ];
+
+        function handleEnter(e) {
+            if (e.key === 'Enter') generateHooks();
+        }
+
+        function generateHooks() {
+            const topic = document.getElementById('topic').value.trim();
+            if (!topic) return;
+
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '';
+
+            // Shuffle and pick 3
+            const shuffled = [...templates].sort(() => 0.5 - Math.random());
+            const selected = shuffled.slice(0, 3);
+
+            selected.forEach(t => {
+                const filled = t.text.replace('{topic}', topic).replace('[Experts]', 'gurus');
+                const div = document.createElement('div');
+                div.className = 'hook-card';
+                div.innerHTML = `<span class="category">${t.category}</span>${filled}`;
+                div.onclick = () => {
+                    navigator.clipboard.writeText(filled);
+                    alert('Copied!');
+                };
+                resultsDiv.appendChild(div);
+            });
+        }
+    </script>
+</body>
+</html>
