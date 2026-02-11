@@ -44,7 +44,12 @@
             const sub = document.getElementById('ctaSub');
             if (GUMROAD_URL) {
                 a.href = GUMROAD_URL;
-                sub.textContent = "Instant download · $9";
+                const url = new URL(GUMROAD_URL);
+                url.searchParams.set('utm_source','viral-hook-generator');
+                url.searchParams.set('utm_medium','cta');
+                url.searchParams.set('utm_campaign','launch');
+                a.href = url.toString();
+                sub.textContent = "Instant download · HK$69";
             } else {
                 a.style.opacity = '0.6';
                 a.style.pointerEvents = 'none';
