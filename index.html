@@ -12,6 +12,9 @@
         input[type="text"] { width: 100%; padding: 12px; margin-bottom: 1.5rem; border: 1px solid #333; background: #000; color: #fff; border-radius: 6px; font-size: 1rem; box-sizing: border-box; }
         button { width: 100%; padding: 12px; background: #00ff88; color: #000; border: none; border-radius: 6px; font-size: 1rem; font-weight: bold; cursor: pointer; transition: transform 0.1s; }
         button:active { transform: scale(0.98); }
+        .cta { display:block; text-align:center; margin-top: 1rem; padding: 12px; border-radius: 8px; background:#fff; color:#000; font-weight:800; text-decoration:none; }
+        .cta:hover { opacity: 0.92; }
+        .cta-sub { text-align:center; margin-top: 8px; font-size: 0.8rem; color:#aaa; }
         .results { margin-top: 2rem; }
         .hook-card { background: #333; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; border-left: 4px solid #00ff88; cursor: pointer; position: relative; }
         .hook-card:hover { background: #3a3a3a; }
@@ -26,10 +29,28 @@
         <label for="topic">What is your video about?</label>
         <input type="text" id="topic" placeholder="e.g., Coding, Vegan Diet, Bitcoin..." onkeypress="handleEnter(event)">
         <button onclick="generateHooks()">Generate Hooks</button>
+
+        <a class="cta" id="ctaLink" href="#" target="_blank" rel="noopener">Get 200 Hooks (Instant Download) →</a>
+        <div class="cta-sub" id="ctaSub">(Checkout link coming soon — I’ll enable this once Gumroad is ready.)</div>
+
         <div class="results" id="results"></div>
     </div>
 
     <script>
+        // TODO: Set this to your Gumroad product URL once created.
+        const GUMROAD_URL = "";
+        (function initCTA(){
+            const a = document.getElementById('ctaLink');
+            const sub = document.getElementById('ctaSub');
+            if (GUMROAD_URL) {
+                a.href = GUMROAD_URL;
+                sub.textContent = "Instant download · $9";
+            } else {
+                a.style.opacity = '0.6';
+                a.style.pointerEvents = 'none';
+            }
+        })();
+
         const templates = [
             { text: "Stop doing {topic} like this, it's killing your progress.", category: "Negative/Warning" },
             { text: "I tried {topic} for 30 days and here's what happened.", category: "Case Study" },
